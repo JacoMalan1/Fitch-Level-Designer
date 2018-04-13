@@ -137,7 +137,7 @@ namespace Fitch_Level_Designer
             if (filename == "")
                 return;
 
-            Editor.level = World.LoadFromFile(Editor.world, filename);
+            Editor.level = World.LoadFromFile(ref Editor.world, filename);
 
         }
 

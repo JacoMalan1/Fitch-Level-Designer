@@ -21,13 +21,23 @@ namespace Fitch_Level_Designer
 
         }
 
-        public static Block[,] LoadFromFile(World world, string filePath)
+        public static Block[,] LoadFromFile(ref World world, string filePath)
         {
             
             if (!File.Exists(filePath))
                 throw new FileNotFoundException();
 
             string[] lines = File.ReadAllLines(filePath);
+
+            int width, height;
+
+            if (Int32.TryParse(lines[1], out height) && Int32.TryParse(lines[0], out width))
+            {
+
+                world.Size = new Vector2(width, height);
+                Array.Copy(lines, 2, lines, 0, lines.Length - 2);
+
+            }
 
             Block[,] blocks = new Block[(int)world.Size.X, (int)world.Size.Y];
 
